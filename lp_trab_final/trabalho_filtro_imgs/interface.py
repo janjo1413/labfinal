@@ -14,23 +14,23 @@ class Principal:
         """
         self.janela = tk.Tk()
         self.janela.title("Aplicação de Filtros")
-        self.janela.geometry("600x700")  # Aumentando um pouco a janela
-        self.janela.configure(bg="#f0f0f0")  # Definindo um fundo mais suave
+        self.janela.geometry("600x700")  
+        self.janela.configure(bg="#f0f0f0") 
         self.imagem = None
 
-        # Label de Imagem
+        
         self.label_imagem = tk.Label(self.janela, bg="#f0f0f0")
-        self.label_imagem.pack(pady=5)  # Espaço superior
+        self.label_imagem.pack(pady=5)  
 
-        # Botão para escolher imagem
+        
         self.botao_selecionar_imagem = tk.Button(self.janela, text="Escolher Imagem Local", command=self.selecionar_imagem, relief="solid", bg="#5cb85c", fg="white", width=30)
         self.botao_selecionar_imagem.pack(pady=5)
 
-        # Botão para inserir link
+        
         self.botao_inserir_link = tk.Button(self.janela, text="Inserir via Link", command=self.inserir_link_imagem, relief="solid", bg="#0275d8", fg="white", width=30)
         self.botao_inserir_link.pack(pady=5)
 
-        # Filtros
+        
         self.filtros = {
             "Escala de Cinza": EscalaCinza(),
             "Preto e Branco": PretoBranco(),
@@ -47,15 +47,15 @@ class Principal:
         for nome, var in self.var_filtros.items():
             tk.Checkbutton(self.filtro_frame, text=nome, variable=var, bg="#f0f0f0").pack(anchor="w", pady=5)
 
-        # Botão para aplicar filtros
+        
         self.botao_aplicar_filtros = tk.Button(self.janela, text="Aplicar Filtros", command=self.aplicar_filtros, relief="solid", bg="#f0ad4e", fg="white", width=30)
         self.botao_aplicar_filtros.pack(pady=5)
 
-        # Botão para listar imagens
+        
         self.botao_listar_imagens = tk.Button(self.janela, text="Listar Arquivos de Imagens", command=self.listar_imagens, relief="solid", bg="#5bc0de", fg="white", width=30)
         self.botao_listar_imagens.pack(pady=5)
 
-        # Botão para sair
+        
         self.botao_sair = tk.Button(self.janela, text="Sair", command=self.janela.quit, relief="solid", bg="#d9534f", fg="white", width=30)
         self.botao_sair.pack(pady=5)
 
@@ -78,14 +78,14 @@ class Principal:
         link = simpledialog.askstring("Inserir Link", "Digite o link da imagem:")
 
         if link:
-            link = link.strip()  # Remove espaços em branco antes e depois da URL
+            link = link.strip()  
 
-            # Verifica se o link é uma URL válida
+            
             if not validators.url(link):
                 messagebox.showerror("Erro", "O link fornecido não é uma URL válida. Certifique-se de que o link está completo e inclui o esquema (http:// ou https://).")
                 return
 
-            # Faz o download e carrega a imagem
+            
             download = Download(link)
             caminho = download.fazer_download()
             if caminho:

@@ -20,7 +20,7 @@ class Download:
                 messagebox.showerror("Erro", "O link fornecido não é uma URL válida. Certifique-se de que o link está completo e inclui o esquema (http:// ou https://).")
                 return None
 
-            response = requests.get(self.url, timeout=10)  # Adiciona um tempo limite para a requisição
+            response = requests.get(self.url, timeout=10) 
             response.raise_for_status()
 
             # Verifica se o conteúdo é uma imagem
@@ -29,16 +29,16 @@ class Download:
                 messagebox.showerror("Erro", "O conteúdo do link não é uma imagem. Por favor, forneça um link para uma imagem válida.")
                 return None
 
-            # Processa e salva a imagem
+            
             imagem = Image.open(io.BytesIO(response.content)).convert("RGB")
             
-            # Escolhe um nome único para salvar
+            
             caminho = filedialog.asksaveasfilename(
                 defaultextension=".png",
                 filetypes=[("PNG Image", "*.png")],
                 title="Salvar Imagem"
             )
-            if not caminho:  # Se o usuário cancelar o diálogo
+            if not caminho:
                 return None
 
             imagem.save(caminho)
